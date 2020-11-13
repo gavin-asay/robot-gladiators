@@ -10,7 +10,6 @@ var enemyAttack = 12;
 var fight = function(enemyName) {
     // repeat and execute as long as the enemy-robot is alive
     while(enemyHealth > 0 && playerHealth > 0) {
-        debugger;
 
     var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
 
@@ -50,7 +49,6 @@ var fight = function(enemyName) {
 
         // check player's health
         if (playerHealth <= 0) {
-            debugger;
             window.alert(playerName + " has died!");
             break;
         } else {
@@ -59,13 +57,44 @@ var fight = function(enemyName) {
     }
 };
 
-for(var i = 0; i < enemyNames.length; i++) {
-    if (playerHealth > 0) {
-        window.alert("Welcome to Robot Gladiators! Round " + (i + 1));
-        var pickedEnemyName = enemyNames[i];
-        enemyHealth = 50;
-        fight(pickedEnemyName);
-    } else { window.alert("You have lost your robot in battle! Game Over!");
-    break;
+// function to start a new game
+var startGame = function() {
+    // reset player stats
+    debugger;
+    playerHealth = 100;
+    playerAttack = 10;
+    playerMoney = 10;
+    for(var i = 0; i < enemyNames.length; i++) {
+        if (playerHealth > 0) {
+            window.alert("Welcome to Robot Gladiators! Round " + (i + 1));
+            var pickedEnemyName = enemyNames[i];
+            enemyHealth = 50;
+            fight(pickedEnemyName);
+        } else { window.alert("You have lost your robot in battle! Game Over!");
+        break;
+        }
     }
+    endGame();
 }
+
+// function to end the entire game
+var endGame = function() {
+    window.alert("The game has now ended. Let's see how you did!");
+    var playAgainConfirm = window.confirm("Would you like to play again?");
+
+    if (playAgainConfirm) {
+        // restart the game
+        startGame();
+    } else {
+        window.alert("Thank you for playing Robot Gladiators! Come back soon!");
+    }
+};
+
+// start the game when the page loads
+startGame();
+
+// line 68 else: instead of break, run function to restart game
+// reset all variables to initial values, prompt for name again, then fight()
+
+// shop: if health, playerHealth = playerHealth + x
+// if upgrade, playerAttack = playerAttack + 2
